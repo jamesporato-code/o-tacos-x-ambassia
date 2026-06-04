@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>O'Tacos x Ambassia — Offre étudiante</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #ffffff;
+      min-height: 100vh;
+      color: #111;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* ====== GRADIENT MESH — tons O'Tacos orange/ambre ====== */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -20%;
+      left: -10%;
+      width: 60%;
+      height: 60%;
+      background: radial-gradient(circle, rgba(255, 145, 77, 0.13) 0%, transparent 70%);
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -10%;
+      right: -15%;
+      width: 55%;
+      height: 55%;
+      background: radial-gradient(circle, rgba(255, 145, 49, 0.1) 0%, transparent 70%);
+      filter: blur(90px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .gradient-blob {
+      position: fixed;
+      top: 45%;
+      left: 55%;
+      transform: translate(-50%, -50%);
+      width: 50%;
+      height: 50%;
+      background: radial-gradient(circle, rgba(181, 74, 28, 0.06) 0%, transparent 70%);
+      filter: blur(60px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page {
+      max-width: 480px;
+      margin: 0 auto;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ====== HEADER ====== */
+    .hero {
+      padding: 36px 24px 32px;
+      text-align: center;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 28px;
+    }
+    .nav-logo img {
+      height: 48px;
+      width: auto;
+    }
+
+    .collab-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 145, 77, 0.08);
+      border: 1px solid rgba(255, 145, 77, 0.15);
+      border-radius: 100px;
+      padding: 6px 16px;
+      margin-bottom: 24px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #B54A1C;
+      letter-spacing: 0.3px;
+    }
+    .collab-badge .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #FF914D;
+      animation: pulse-dot 2s infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -1.2px;
+      color: #111;
+      margin-bottom: 12px;
+    }
+    h1 em {
+      font-style: italic;
+      color: #FF914D;
+    }
+
+    .hero-sub {
+      font-size: 15px;
+      color: #888;
+      line-height: 1.5;
+      margin-bottom: 24px;
+      font-weight: 400;
+    }
+
+    /* ====== OFFER CARD ====== */
+    .offer-card {
+      background: #fff;
+      border: 1px solid rgba(255, 145, 77, 0.15);
+      border-radius: 20px;
+      padding: 20px 24px;
+      margin-bottom: 8px;
+      box-shadow: 0 2px 16px rgba(255, 145, 77, 0.06), 0 0 0 1px rgba(255, 145, 77, 0.04);
+    }
+    .offer-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #FF914D;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 8px;
+    }
+    .offer-price {
+      font-size: 26px;
+      font-weight: 800;
+      color: #111;
+      letter-spacing: -0.5px;
+    }
+    .offer-price .old {
+      font-size: 16px;
+      color: #ccc;
+      text-decoration: line-through;
+      font-weight: 500;
+      margin-left: 8px;
+    }
+    .offer-note {
+      font-size: 12px;
+      color: #aaa;
+      margin-top: 6px;
+      font-weight: 400;
+    }
+
+    /* ====== SEPARATOR ====== */
+    .sep {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 145, 77, 0.12), transparent);
+      margin: 8px 0;
+    }
+
+    /* ====== FORM ====== */
+    .form-section {
+      padding: 28px 24px 40px;
+      flex: 1;
+    }
+    .form-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #bbb;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 24px;
+    }
+
+    .field { margin-bottom: 18px; }
+    .field label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: #444;
+      margin-bottom: 8px;
+    }
+    .field input {
+      width: 100%;
+      padding: 16px 18px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 14px;
+      font-size: 16px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      outline: none;
+      background: #fafafa;
+      color: #111;
+      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+      -webkit-appearance: none;
+    }
+    .field input::placeholder {
+      color: #ccc;
+      font-weight: 400;
+    }
+    .field input:focus {
+      border-color: #FF914D;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(255, 145, 77, 0.1);
+    }
+    .field input.invalid {
+      border-color: #e53e3e;
+      background: rgba(229, 62, 62, 0.03);
+    }
+    .field .hint {
+      font-size: 12px;
+      color: #bbb;
+      margin-top: 6px;
+    }
+    .error-msg {
+      font-size: 12px;
+      color: #e53e3e;
+      margin-top: 5px;
+      display: none;
+      font-weight: 500;
+    }
+    .error-msg.show { display: block; }
+
+    /* ====== CTA BUTTON — gradient O'Tacos ====== */
+    .cta-btn {
+      width: 100%;
+      padding: 18px;
+      background: linear-gradient(135deg, #FF914D 0%, #FF9131 50%, #B54A1C 100%);
+      color: #fff;
+      border: none;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      margin-top: 8px;
+      letter-spacing: -0.2px;
+      -webkit-appearance: none;
+      transition: transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 14px rgba(255, 145, 77, 0.3);
+    }
+    .cta-btn:active { transform: scale(0.97); }
+    .cta-btn:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
+
+    .legal {
+      text-align: center;
+      font-size: 11px;
+      color: #ccc;
+      margin-top: 20px;
+      line-height: 1.6;
+    }
+    .legal a { color: #999; text-decoration: none; }
+
+    /* ====== FOOTER ====== */
+    .footer {
+      text-align: center;
+      padding: 20px 24px;
+      border-top: 1px solid rgba(0, 0, 0, 0.04);
+    }
+    .footer img {
+      height: 28px;
+      opacity: 0.3;
+      margin-bottom: 6px;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #ccc;
+    }
+
+    /* ====== VIEWS ====== */
+    .view { display: none; flex-direction: column; }
+    .view.active { display: flex; }
+    .form-view.active { display: flex; }
+
+    /* ====== LOADING ====== */
+    .loading-view {
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      padding: 80px 24px;
+      text-align: center;
+    }
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(0, 0, 0, 0.06);
+      border-top-color: #FF914D;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      margin-bottom: 16px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ====== SUCCESS ====== */
+    .success-view {
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      text-align: center;
+      padding: 48px 24px;
+    }
+
+    @keyframes pop-in {
+      0% { transform: scale(0); opacity: 0; }
+      60% { transform: scale(1.15); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    @keyframes draw-check {
+      0% { stroke-dashoffset: 48; }
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.2); }
+      50% { box-shadow: 0 0 0 16px rgba(34, 197, 94, 0); }
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .check-wrap {
+      width: 88px;
+      height: 88px;
+      margin: 0 auto 24px;
+      animation: pop-in 0.5s cubic-bezier(0.17, 0.67, 0.35, 1.2);
+    }
+    .check-wrap .bg { fill: #22C55E; }
+    .check-wrap .mark {
+      stroke: #fff;
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+      stroke-dasharray: 48;
+      stroke-dashoffset: 48;
+      animation: draw-check 0.35s ease-out 0.35s forwards;
+    }
+    .status-text {
+      font-size: 24px;
+      font-weight: 800;
+      color: #22C55E;
+      letter-spacing: 1.5px;
+      animation: fade-up 0.4s ease-out 0.15s both;
+    }
+    .name-display {
+      font-size: 18px;
+      font-weight: 600;
+      color: #111;
+      margin: 8px 0 28px;
+      animation: fade-up 0.4s ease-out 0.25s both;
+    }
+    .time-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(34, 197, 94, 0.06);
+      border: 1px solid rgba(34, 197, 94, 0.15);
+      border-radius: 16px;
+      padding: 14px 28px;
+      margin-bottom: 20px;
+      animation: fade-up 0.4s ease-out 0.35s both, pulse-glow 2.5s infinite 1.5s;
+    }
+    .live-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #22C55E;
+      animation: blink 1.4s infinite;
+    }
+    .time-text {
+      font-size: 18px;
+      font-weight: 700;
+      color: #22C55E;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.5px;
+    }
+    .code-line {
+      font-size: 13px;
+      color: #999;
+      animation: fade-up 0.4s ease-out 0.42s both;
+    }
+    .code-val {
+      font-weight: 700;
+      color: #111;
+      letter-spacing: 3px;
+      font-size: 16px;
+    }
+    .cashier-box {
+      margin-top: 32px;
+      padding: 16px 28px;
+      background: linear-gradient(135deg, #FF914D 0%, #B54A1C 100%);
+      border-radius: 14px;
+      animation: fade-up 0.4s ease-out 0.5s both;
+      box-shadow: 0 4px 14px rgba(255, 145, 77, 0.3);
+    }
+    .cashier-text {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .offer-line {
+      margin-top: 16px;
+      font-size: 14px;
+      color: #999;
+      font-weight: 500;
+      animation: fade-up 0.4s ease-out 0.58s both;
+    }
+    .ref-line {
+      font-size: 11px;
+      color: #ccc;
+      margin-top: 24px;
+      animation: fade-up 0.4s ease-out 0.65s both;
+    }
+  </style>
+</head>
+<body>
+  <!-- Gradient mesh blobs -->
+  <div class="gradient-blob"></div>
+
+  <div class="page">
+
+    <!-- FORMULAIRE -->
+    <div class="view form-view active" id="formView">
+      <div class="hero">
+        <div class="nav-logo">
+          <img src="ambassia-logo.svg" alt="Ambassia">
+        </div>
+
+        <div class="collab-badge">
+          <span class="dot"></span>
+          Ambassia &times; O'Tacos Nanterre
+        </div>
+
+        <h1>Ton tacos M<br>à <em>3&euro;</em> au lieu de 6,90&euro;</h1>
+        <p class="hero-sub">Offre exclusive réservée aux étudiants de Paris Nanterre. Septembre 2026.</p>
+
+        <div class="offer-card">
+          <div class="offer-label">Offre du moment</div>
+          <div class="offer-price">Tacos M — 3&euro; <span class="old">6,90&euro;</span></div>
+          <div class="offer-note">Sur présentation de l'écran de validation au caissier</div>
+        </div>
+      </div>
+
+      <div class="sep"></div>
+
+      <div class="form-section">
+        <div class="form-title">Remplis tes infos pour valider</div>
+        <form id="mainForm" novalidate>
+          <div class="field">
+            <label for="prenom">Prénom</label>
+            <input type="text" id="prenom" placeholder="Ton prénom" autocomplete="given-name" autocapitalize="words" required>
+            <p class="error-msg" id="errPrenom">Merci d'entrer ton prénom</p>
+          </div>
+          <div class="field">
+            <label for="nom">Nom</label>
+            <input type="text" id="nom" placeholder="Ton nom" autocomplete="family-name" autocapitalize="words" required>
+            <p class="error-msg" id="errNom">Merci d'entrer ton nom</p>
+          </div>
+          <div class="field">
+            <label for="email">Email étudiant</label>
+            <input type="email" id="email" placeholder="prenom.nom@parisnanterre.fr" autocomplete="email" autocapitalize="none" required>
+            <p class="hint">Utilise ton adresse mail universitaire</p>
+            <p class="error-msg" id="errEmail">Merci d'entrer une adresse email valide</p>
+          </div>
+          <div class="field">
+            <label for="codeAmb">Code ambassadeur</label>
+            <input type="text" id="codeAmb" placeholder="Ex : LOUIS" autocapitalize="characters" autocomplete="off" required
+                   style="text-transform: uppercase; letter-spacing: 3px; font-weight: 700;">
+            <p class="hint">Demande le code à l'ambassadeur qui t'a envoyé ici</p>
+            <p class="error-msg" id="errCodeAmb">Merci d'entrer le code ambassadeur</p>
+          </div>
+          <button type="submit" class="cta-btn" id="submitBtn">Valider mon offre</button>
+        </form>
+        <p class="legal">En validant, tu confirmes être étudiant(e) et acceptes qu'Ambassia collecte ton nom et email dans le cadre de cette opération. <a href="https://www.ambassia.net" target="_blank">ambassia.net</a></p>
+      </div>
+
+      <div class="footer">
+        <img src="ambassia-logo.svg" alt="Ambassia">
+        <p>&copy; 2026 Ambassia. Tous droits réservés.</p>
+      </div>
+    </div>
+
+    <!-- CHARGEMENT -->
+    <div class="view loading-view" id="loadingView">
+      <div class="spinner"></div>
+      <p style="font-size: 14px; color: #999; font-weight: 500;">Validation en cours...</p>
+    </div>
+
+    <!-- CONFIRMATION -->
+    <div class="view success-view" id="successView">
+      <div class="check-wrap">
+        <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+          <circle class="bg" cx="40" cy="40" r="40"/>
+          <path class="mark" d="M23 42L34 53L57 28"/>
+        </svg>
+      </div>
+      <div class="status-text">OFFRE VALIDÉE</div>
+      <div class="name-display" id="confirmedName"></div>
+      <div class="time-badge">
+        <div class="live-dot"></div>
+        <div class="time-text" id="liveTime"></div>
+      </div>
+      <div class="code-line">Code : <span class="code-val" id="codeDisplay"></span></div>
+      <div class="cashier-box">
+        <div class="cashier-text">Montrez cet écran au caissier</div>
+      </div>
+      <div class="offer-line" id="offerReminder"></div>
+      <div class="ref-line" id="refLine"></div>
+    </div>
+
+  </div>
+
+  <script>
+    (function () {
+      // =============================================
+      // CONFIG
+      // =============================================
+      var WEBHOOK_URL = 'VOTRE_URL_GOOGLE_APPS_SCRIPT';
+      var OFFER_TEXT = 'Tacos M à 3€ au lieu de 6,90€';
+      // =============================================
+
+      var submitted = false;
+      var formView = document.getElementById('formView');
+      var loadingView = document.getElementById('loadingView');
+      var successView = document.getElementById('successView');
+      var form = document.getElementById('mainForm');
+
+      function showView(v) {
+        formView.classList.remove('active');
+        loadingView.classList.remove('active');
+        successView.classList.remove('active');
+        v.classList.add('active');
+      }
+
+      function validate() {
+        var ok = true;
+        var fields = [
+          { id: 'prenom', err: 'errPrenom', isEmail: false },
+          { id: 'nom', err: 'errNom', isEmail: false },
+          { id: 'email', err: 'errEmail', isEmail: true },
+          { id: 'codeAmb', err: 'errCodeAmb', isEmail: false }
+        ];
+        for (var i = 0; i < fields.length; i++) {
+          var f = fields[i];
+          var input = document.getElementById(f.id);
+          var errEl = document.getElementById(f.err);
+          var val = input.value.trim();
+          var bad = false;
+          if (!val) {
+            bad = true;
+          } else if (f.isEmail) {
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+              bad = true;
+            }
+          }
+          if (bad) {
+            input.classList.add('invalid');
+            errEl.classList.add('show');
+            ok = false;
+          } else {
+            input.classList.remove('invalid');
+            errEl.classList.remove('show');
+          }
+        }
+        return ok;
+      }
+
+      function makeCode() {
+        var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+        var r = '';
+        for (var i = 0; i < 6; i++) {
+          r += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return r;
+      }
+
+      function tick() {
+        var n = new Date();
+        var d = String(n.getDate()).padStart(2, '0') + '/' + String(n.getMonth() + 1).padStart(2, '0') + '/' + n.getFullYear();
+        var t = String(n.getHours()).padStart(2, '0') + ':' + String(n.getMinutes()).padStart(2, '0') + ':' + String(n.getSeconds()).padStart(2, '0');
+        document.getElementById('liveTime').textContent = d + '  ' + t;
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (submitted) return;
+        if (!validate()) return;
+
+        submitted = true;
+        var prenom = document.getElementById('prenom').value.trim();
+        var nom = document.getElementById('nom').value.trim();
+        var email = document.getElementById('email').value.trim();
+        var amb = document.getElementById('codeAmb').value.trim().toUpperCase();
+        var code = makeCode();
+
+        showView(loadingView);
+
+        var payload = {
+          prenom: prenom,
+          nom: nom,
+          email: email,
+          ambassadeur: amb,
+          code: code,
+          date: new Date().toISOString(),
+          offre: OFFER_TEXT
+        };
+
+        if (WEBHOOK_URL !== 'VOTRE_URL_GOOGLE_APPS_SCRIPT') {
+          try {
+            fetch(WEBHOOK_URL, {
+              method: 'POST',
+              mode: 'no-cors',
+              headers: { 'Content-Type': 'text/plain' },
+              body: JSON.stringify(payload)
+            }).catch(function () {});
+          } catch (err) {}
+        }
+
+        setTimeout(function () {
+          showView(successView);
+          document.getElementById('confirmedName').textContent = prenom + ' ' + nom;
+          document.getElementById('codeDisplay').textContent = code;
+          document.getElementById('offerReminder').textContent = OFFER_TEXT;
+          document.getElementById('refLine').textContent = 'Ambassadeur : ' + amb + '  |  ' + code;
+          tick();
+          setInterval(tick, 1000);
+        }, 1100);
+      });
+
+      document.getElementById('prenom').focus();
+    })();
+  </script>
+</body>
+</html>
