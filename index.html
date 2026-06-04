@@ -539,7 +539,7 @@
       // =============================================
       // CONFIG
       // =============================================
-      var WEBHOOK_URL = 'VOTRE_URL_GOOGLE_APPS_SCRIPT';
+      var WEBHOOK_URL = 'https://script.google.com/a/macros/ambassia.net/s/AKfycbwFWWzsokZ83ZAdjx7v5XVBd-sj02AzrE5jHzGt0nSuavZm-7ongpTprlK9Ln2GPOCc/exec';
       var OFFER_TEXT = 'Tacos M à 3€ au lieu de 6,90€';
       // =============================================
 
@@ -629,7 +629,7 @@
           offre: OFFER_TEXT
         };
 
-        if (WEBHOOK_URL !== 'VOTRE_URL_GOOGLE_APPS_SCRIPT') {
+        if (WEBHOOK_URL !== 'https://script.google.com/a/macros/ambassia.net/s/AKfycbwFWWzsokZ83ZAdjx7v5XVBd-sj02AzrE5jHzGt0nSuavZm-7ongpTprlK9Ln2GPOCc/exec') {
           try {
             fetch(WEBHOOK_URL, {
               method: 'POST',
